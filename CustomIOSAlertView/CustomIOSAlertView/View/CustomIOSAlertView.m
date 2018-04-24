@@ -261,7 +261,7 @@ CGFloat buttonSpacerHeight = 0;
         [closeButton setTag:i];
 
         [closeButton setTitle:[buttonTitles objectAtIndex:i] forState:UIControlStateNormal];
-        [closeButton setTitleColor:[UIColor colorWithRed:0.0f green:0.5f blue:1.0f alpha:1.0f] forState:UIControlStateNormal];
+        [closeButton setTitleColor:self.tintColor forState:UIControlStateNormal];
         [closeButton setTitleColor:[UIColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:0.5f] forState:UIControlStateHighlighted];
         [closeButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14.0f]];
         closeButton.titleLabel.numberOfLines = 0;
@@ -417,7 +417,7 @@ CGFloat buttonSpacerHeight = 0;
 {
     CGSize screenSize = [self countScreenSize];
     CGSize dialogSize = [self countDialogSize];
-    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
 
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if (UIInterfaceOrientationIsLandscape(interfaceOrientation) && NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1) {
@@ -427,11 +427,11 @@ CGFloat buttonSpacerHeight = 0;
     }
 
     [UIView animateWithDuration:0.2f delay:0.0 options:UIViewAnimationOptionTransitionNone
-					 animations:^{
+                     animations:^{
                          dialogView.frame = CGRectMake((screenSize.width - dialogSize.width) / 2, (screenSize.height - keyboardSize.height - dialogSize.height) / 2, dialogSize.width, dialogSize.height);
-					 }
-					 completion:nil
-	 ];
+                     }
+                     completion:nil
+     ];
 }
 
 - (void)keyboardWillHide: (NSNotification *)notification
